@@ -9,7 +9,7 @@ export const ContentSection = ({ Section }) => {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Box sx={{ bgcolor: "#cfe8fc" }}>
+        <Box sx={{ bgcolor: "#fff" }}>
           <Section />
         </Box>
       </Container>
