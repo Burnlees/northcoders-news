@@ -3,6 +3,7 @@ import { getArticleById } from "../api";
 import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import { CommentsSection } from "../Comments/CommentsSection";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -23,13 +24,14 @@ export const ArticlePage = () => {
       setLoading(false);
     });
   }, [article_id]);
-  console.log(article);
 
   return loading ? (
-    "Loading..."
+    <p>Loading...</p>
   ) : (
-    <Item key={article.article_id} elevation={6} sx={{ padding: "1rem" }}>
-      <h2>{article.title}</h2>
+    <Item key={article.article_id} elevation={6} sx={{ padding: "1rem", marginBottom: '1rem', borderRadius: '1rem' }}>
+      <header>
+          <h2>{article.title}</h2>
+      </header>
       <ul>
         <li>Created By: {article.author}</li>
         <li>Created At: {article.created_at}</li>
@@ -39,9 +41,9 @@ export const ArticlePage = () => {
       <p>{article.body}</p>
 
       <ul>
-        <li>Comments: {article.comment_count}</li>
         <li>Votes: {article.votes}</li>
       </ul>
+      <CommentsSection articleId={article_id} numOfComments={article.comment_count} />
     </Item>
   );
 };

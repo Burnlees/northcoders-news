@@ -15,9 +15,8 @@ export const ArticleList = () => {
     });
   }, []);
 
-  console.log(articles, "response");
   return loading ? (
-    "Loading..."
+    <p>Loading...</p>
   ) : (
     <ul>
       {articles.map((articleData) => {
