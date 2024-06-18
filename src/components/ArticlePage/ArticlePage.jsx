@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { CommentsSection } from "../Comments/CommentsSection";
 import { VotingSystem } from "../VotingSystem/VotingSystem";
+import { CommentDeleteNotification } from "../Comments/DeleteNotification";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export const ArticlePage = () => {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -56,7 +58,9 @@ export const ArticlePage = () => {
       <CommentsSection
         articleId={article_id}
         numOfComments={article.comment_count}
+        setOpen={setOpen}
       />
+    <CommentDeleteNotification open={open} setOpen={setOpen}/>
     </Item>
   );
 };

@@ -4,10 +4,16 @@ const ncNews = axios.create({
   baseURL: "https://burnlees-news.onrender.com/",
 });
 
-export const getArticles = () => {
-  return ncNews.get("/api/articles").then((response) => {
-    return response.data.articles;
-  });
+export const getArticles = (topic) => {
+  return ncNews
+    .get("/api/articles", {
+      params: {
+        topic,
+      },
+    })
+    .then((response) => {
+      return response.data.articles;
+    });
 };
 
 export const getArticleById = (id) => {
@@ -39,5 +45,11 @@ export const postComment = (id, commentData) => {
 };
 
 export const removeComment = (id) => {
-  return ncNews.delete(`/api/comments/${id}`)
-}
+  return ncNews.delete(`/api/comments/${id}`);
+};
+
+export const getTopics = () => {
+  return ncNews.get("/api/topics").then((response) => {
+    return response.data.topics;
+  });
+};

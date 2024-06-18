@@ -7,9 +7,9 @@ import { useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { PostCommentBox } from "./PostComment";
 import { UserContext } from "../../contexts/User";
-import RemoveComment from "./RemoveComment";
+import DeleteSelectedComment from "./RemoveComment";
 
-export const CommentsSection = ({ articleId, numOfComments }) => {
+export const CommentsSection = ({ articleId, numOfComments, setOpen }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [numberOfComments, setNumberofComments] = useState(numOfComments)
@@ -58,7 +58,8 @@ export const CommentsSection = ({ articleId, numOfComments }) => {
                     <li>{comment.votes}</li>
                   </ul>
                   {comment.author === user ? (
-                    <RemoveComment commentId={comment.comment_id} setRenderToggle={setRenderToggle} setNumberofComments={setNumberofComments} />
+                    <DeleteSelectedComment commentId={comment.comment_id} setRenderToggle={setRenderToggle} setNumberofComments={setNumberofComments}
+                    setOpen={setOpen} />
                   ) : null}
                 </Box>
               </Box>
