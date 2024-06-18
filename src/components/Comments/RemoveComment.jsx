@@ -4,16 +4,20 @@ import Box from "@mui/material/Box";
 import { removeComment } from "../api";
 import { useState } from "react";
 
-export default function RemoveComment({
+export default function DeleteSelectedComment({
   commentId,
   setRenderToggle,
   setNumberofComments,
+  setOpen
 }) {
   const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
+  const handleCommentDeletion = () => {
     setLoading(true);
     removeComment(commentId).then(() => {
+        setOpen((open) => {
+            return true
+        })
       setNumberofComments((currNumber) => {
         return currNumber - 1;
       });
@@ -21,13 +25,15 @@ export default function RemoveComment({
         return !toggle;
       });
       setLoading(false);
-    });
+    }).catch((err) => {
+      alert('Comment deletion failed')
+    })
   };
 
   return (
     <Button
       variant="contained"
-      onClick={handleClick}
+      onClick={handleCommentDeletion}
       sx={{
         maxHeight: "1.5rem",
         backgroundColor: "red",
