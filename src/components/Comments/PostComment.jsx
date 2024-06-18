@@ -1,11 +1,13 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postComment } from "../api";
+import { UserContext } from "../../contexts/User";
 
-export const PostCommentBox = ({ articleId, setComments }) => {
+export const PostCommentBox = ({ articleId, setComments, setRenderToggle, setNumberofComments }) => {
+  const { user, setUser } = useContext(UserContext);
   const [newComment, setnewComment] = useState({
-    username: "grumpy19",
+    username: user,
     body: "",
   });
 
@@ -17,22 +19,17 @@ export const PostCommentBox = ({ articleId, setComments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setComments((currComments) => {
-      const addedComment = newComment;
-      addedComment.created_at = Date();
-      addedComment.author = addedComment.username;
-      addedComment.votes = 0;
-      addedComment.id = currComments.length + 1;
-      return [addedComment, ...currComments];
-    });
     postComment(articleId, newComment)
       .then((response) => {
-        setnewComment({ username: "grumpy19", body: "" });
+        setNumberofComments((currNumber) => {
+          return currNumber + 1
+        })
+        setnewComment({ username: user, body: "" });
+        setRenderToggle((toggle) => {
+          return !toggle
+        })
       })
       .catch((err) => {
-        setComments((currComments) => {
-          return [...currComments].slice(1);
-        });
         alert("Comment failed to post");
       });
   };

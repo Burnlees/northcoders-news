@@ -3,13 +3,19 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getCommentsByArticleId } from "../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { PostCommentBox } from "./PostComment";
+import { UserContext } from "../../contexts/User";
+import RemoveComment from "./RemoveComment";
 
 export const CommentsSection = ({ articleId, numOfComments }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [numberOfComments, setNumberofComments] = useState(numOfComments)
+  const [renderToggle, setRenderToggle] = useState(false);
+  const [expand, setExpand] = useState(false)
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     setLoading(true);
@@ -17,22 +23,27 @@ export const CommentsSection = ({ articleId, numOfComments }) => {
       setComments(commentData);
       setLoading(false);
     });
-  }, [articleId]);
+  }, [articleId, renderToggle]);
 
   return loading ? (
     <p>Loading...</p>
   ) : (
     <div>
-      <Accordion>
+      <Accordion  expanded={expand}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
+          onClick={() => setExpand(!expand)}
         >
-          Comments {`(${numOfComments})`}
+          Comments {`(${numberOfComments})`}
         </AccordionSummary>
         <AccordionDetails>
-          <PostCommentBox articleId={articleId} setComments={setComments} />
+          <PostCommentBox
+            articleId={articleId}
+            setRenderToggle={setRenderToggle}
+            setNumberofComments={setNumberofComments}
+          />
           {comments.map((comment) => {
             return (
               <Box
@@ -40,11 +51,16 @@ export const CommentsSection = ({ articleId, numOfComments }) => {
                 key={comment.comment_id}
               >
                 <p>{comment.body}</p>
-                <ul>
-                  <li>{comment.author}</li>
-                  <li>{comment.created_at}</li>
-                  <li>{comment.votes}</li>
-                </ul>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <ul>
+                    <li>{comment.author}</li>
+                    <li>{comment.created_at}</li>
+                    <li>{comment.votes}</li>
+                  </ul>
+                  {comment.author === user ? (
+                    <RemoveComment commentId={comment.comment_id} setRenderToggle={setRenderToggle} setNumberofComments={setNumberofComments} />
+                  ) : null}
+                </Box>
               </Box>
             );
           })}
