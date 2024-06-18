@@ -6,28 +6,28 @@ import { patchArticleById } from "../api";
 export const VotingSystem = ({ id, setArticle }) => {
   const handleUpVote = () => {
     const newVote = 1;
-    patchArticleById(id, newVote)
-      .then((response) => {
-        setArticle((currArticleData) => {
-          return { ...currArticleData, votes: response.votes };
-        });
-      })
-      .catch((err) => {
-        alert("Upvote failed");
+    setArticle((currArticleData) => {
+      return { ...currArticleData, votes: currArticleData.votes + newVote };
+    });
+    patchArticleById(id, newVote).catch((err) => {
+      setArticle((currArticleData) => {
+        return { ...currArticleData, votes: currArticleData.votes - newVote };
       });
+      alert("Upvote failed");
+    });
   };
 
   const handleDownVote = () => {
     const newVote = -1;
-    patchArticleById(id, newVote)
-      .then((response) => {
-        setArticle((currArticleData) => {
-          return { ...currArticleData, votes: response.votes };
-        });
-      })
-      .catch((err) => {
-        alert("Downvote failed");
+    setArticle((currArticleData) => {
+      return { ...currArticleData, votes: currArticleData.votes + newVote };
+    });
+    patchArticleById(id, newVote).catch((err) => {
+      setArticle((currArticleData) => {
+        return { ...currArticleData, votes: currArticleData.votes - newVote };
       });
+      alert("Downvote failed");
+    });
   };
 
   return (

@@ -5,6 +5,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getCommentsByArticleId } from "../api";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import { PostCommentBox } from "./PostComment";
 
 export const CommentsSection = ({ articleId, numOfComments }) => {
   const [comments, setComments] = useState([]);
@@ -31,9 +32,13 @@ export const CommentsSection = ({ articleId, numOfComments }) => {
           Comments {`(${numOfComments})`}
         </AccordionSummary>
         <AccordionDetails>
+          <PostCommentBox articleId={articleId} setComments={setComments} />
           {comments.map((comment) => {
             return (
-              <Box sx={{borderBottom: '1px solid black'}} key={comment.comment_id}>
+              <Box
+                sx={{ borderBottom: "1px solid black" }}
+                key={comment.comment_id}
+              >
                 <p>{comment.body}</p>
                 <ul>
                   <li>{comment.author}</li>
