@@ -23,8 +23,17 @@ export const getCommentsByArticleId = (id) => {
 };
 
 export const patchArticleById = (id, vote) => {
-  const requestBody = {inc_votes: vote}
+  const requestBody = { inc_votes: vote };
   return ncNews.patch(`/api/articles/${id}`, requestBody).then((response) => {
-    return response.data.updatedArticle
-  })
+    return response.data.updatedArticle;
+  });
+};
+
+export const postComment = (id, commentData) => {
+  const requestBody = commentData;
+  return ncNews
+    .post(`/api/articles/${id}/comments`, requestBody)
+    .then((response) => {
+      return response.data.comment;
+    });
 };
