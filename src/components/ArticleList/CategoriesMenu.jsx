@@ -66,7 +66,7 @@ export const CategoriesMenu = () => {
 
   return (
     <div>
-      <Button variant="contained" onClick={toggleDrawer(true)}>Topics</Button>
+      <Button variant="contained" onClick={toggleDrawer(true)} sx={{m: 1}}>Topics</Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

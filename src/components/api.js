@@ -4,11 +4,14 @@ const ncNews = axios.create({
   baseURL: "https://burnlees-news.onrender.com/",
 });
 
-export const getArticles = (topic) => {
+export const getArticles = (topic, sort_by, order, p) => {
   return ncNews
     .get("/api/articles", {
       params: {
         topic,
+        sort_by,
+        order,
+        p
       },
     })
     .then((response) => {
