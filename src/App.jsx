@@ -5,6 +5,7 @@ import { ContentSection } from "./components/ContentSection/ContentSection";
 import { ArticleList } from "./components/ArticleList/ArticleList";
 import { ArticlePage } from "./components/ArticlePage/ArticlePage";
 import { LandingPage } from "./components/LandingPage/LandPage";
+import { ErrorNotFound } from "./components/Errors/ErrorNotFound";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           path="/articles/:article_id"
           element={<ContentSection Section={ArticlePage} />}
         />
+         <Route path="/404" element={<ContentSection Section={ErrorNotFound} />} />
       </Routes>
     </>
   );
