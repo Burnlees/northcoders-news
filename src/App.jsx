@@ -22,6 +22,7 @@ function App() {
           element={<ContentSection Section={ArticlePage} />}
         />
          <Route path="/404" element={<ContentSection Section={ErrorNotFound} />} />
+         <Route path='*' element={<ContentSection Section={ErrorNotFound} />} />
       </Routes>
     </>
   );

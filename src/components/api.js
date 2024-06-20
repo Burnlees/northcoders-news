@@ -5,18 +5,17 @@ const ncNews = axios.create({
 });
 
 export const getArticles = (topic, sort_by, order, p) => {
-  return ncNews
-    .get("/api/articles", {
-      params: {
-        topic,
-        sort_by,
-        order,
-        p
-      },
-    })
-    .then((response) => {
-      return response.data.articles;
-    });
+  const params = {
+    sort_by,
+    order,
+    p,
+  };
+  if (topic) {
+    params.topic = topic;
+  }
+  return ncNews.get("/api/articles", { params }).then((response) => {
+    return response.data.articles;
+  });
 };
 
 export const getArticleById = (id) => {

@@ -8,7 +8,8 @@ export default function DeleteSelectedComment({
   commentId,
   setRenderToggle,
   setNumberofComments,
-  setOpen
+  setOpen,
+  setArticleError
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +27,7 @@ export default function DeleteSelectedComment({
       });
       setLoading(false);
     }).catch((err) => {
-      alert('Comment deletion failed')
+      setArticleError({open:true, msg: 'Comment Deletion Failed'})
     })
   };
 

@@ -60,8 +60,8 @@ export const ArticleSort = ({ topic, page }) => {
           onChange={handleOrderChange}
           label="Order"
         >
-          <MenuItem value={"asc"}>asc</MenuItem>
-          <MenuItem value={"desc"}>desc</MenuItem>
+          <MenuItem value={"asc"}>Ascending</MenuItem>
+          <MenuItem value={"desc"}>Descending</MenuItem>
         </Select>
       </FormControl>
       <Button variant="contained" onClick={submitSort} sx={{ m: 1, height: '2rem', p: 0, maxWidth: '1rem' }}>
