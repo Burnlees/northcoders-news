@@ -3,7 +3,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Box, Button } from "@mui/material";
 import { patchArticleById } from "../api";
 
-export const VotingSystem = ({ id, setArticle }) => {
+export const VotingSystem = ({ id, setArticle, setArticleError }) => {
   const handleUpVote = () => {
     const newVote = 1;
     setArticle((currArticleData) => {
@@ -13,7 +13,7 @@ export const VotingSystem = ({ id, setArticle }) => {
       setArticle((currArticleData) => {
         return { ...currArticleData, votes: currArticleData.votes - newVote };
       });
-      alert("Upvote failed");
+      setArticleError({ open: true, msg: "Up vote Failed" });
     });
   };
 
@@ -26,7 +26,7 @@ export const VotingSystem = ({ id, setArticle }) => {
       setArticle((currArticleData) => {
         return { ...currArticleData, votes: currArticleData.votes - newVote };
       });
-      alert("Downvote failed");
+      setArticleError({ open: true, msg: "Down vote Failed" });
     });
   };
 

@@ -24,7 +24,7 @@ export const ArticlePagination = () => {
       page={page}
       variant="outlined"
       shape="rounded"
-      sx={{ m: 1 }}
+      sx={{ marginBottom: 5 }}
       onChange={handlePageChange}
     />
   );

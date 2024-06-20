@@ -27,7 +27,7 @@ export const ErrorNotFound = () => {
     >
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt="Error Message"
         height="300"
         image="src/assets/error.jpg"
       />

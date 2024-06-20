@@ -4,7 +4,13 @@ import { useContext, useState } from "react";
 import { postComment } from "../api";
 import { UserContext } from "../../contexts/User";
 
-export const PostCommentBox = ({ articleId, setComments, setRenderToggle, setNumberofComments }) => {
+export const PostCommentBox = ({
+  articleId,
+  setComments,
+  setRenderToggle,
+  setNumberofComments,
+  setArticleError,
+}) => {
   const { user, setUser } = useContext(UserContext);
   const [newComment, setnewComment] = useState({
     username: user,
@@ -22,15 +28,17 @@ export const PostCommentBox = ({ articleId, setComments, setRenderToggle, setNum
     postComment(articleId, newComment)
       .then((response) => {
         setNumberofComments((currNumber) => {
-          return currNumber + 1
-        })
+          return currNumber + 1;
+        });
         setnewComment({ username: user, body: "" });
         setRenderToggle((toggle) => {
-          return !toggle
-        })
+          return !toggle;
+        });
       })
       .catch((err) => {
-        alert("Comment failed to post");
+        setArticleError((open) => {
+          return { open: true, msg: "Comment Failed" };
+        });
       });
   };
 

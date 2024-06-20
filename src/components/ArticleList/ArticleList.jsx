@@ -23,7 +23,8 @@ export const ArticleList = () => {
 
   useEffect(() => {
     setLoading(true);
-    getArticles(filterByTopic, sortBy, order, p).then((response) => {
+    const topic = filterByTopic !== 'null' ? filterByTopic : undefined;
+    getArticles(topic, sortBy, order, p).then((response) => {
       setArticles(response);
       setLoading(false);
     }).catch((err) => {
@@ -62,3 +63,4 @@ export const ArticleList = () => {
     </>
   );
 };
+

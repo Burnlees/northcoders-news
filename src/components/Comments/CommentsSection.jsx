@@ -9,7 +9,7 @@ import { PostCommentBox } from "./PostComment";
 import { UserContext } from "../../contexts/User";
 import DeleteSelectedComment from "./RemoveComment";
 
-export const CommentsSection = ({ articleId, numOfComments, setOpen }) => {
+export const CommentsSection = ({ articleId, numOfComments, setOpen, setArticleError }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [numberOfComments, setNumberofComments] = useState(numOfComments)
@@ -43,6 +43,7 @@ export const CommentsSection = ({ articleId, numOfComments, setOpen }) => {
             articleId={articleId}
             setRenderToggle={setRenderToggle}
             setNumberofComments={setNumberofComments}
+            setArticleError={setArticleError}
           />
           {comments.map((comment) => {
             return (
@@ -59,7 +60,8 @@ export const CommentsSection = ({ articleId, numOfComments, setOpen }) => {
                   </ul>
                   {comment.author === user ? (
                     <DeleteSelectedComment commentId={comment.comment_id} setRenderToggle={setRenderToggle} setNumberofComments={setNumberofComments}
-                    setOpen={setOpen} />
+                    setOpen={setOpen}
+                    setArticleError={setArticleError} />
                   ) : null}
                 </Box>
               </Box>

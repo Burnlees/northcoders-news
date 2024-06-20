@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getArticleById } from "../api";
 import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import { CommentsSection } from "../Comments/CommentsSection";
 import { VotingSystem } from "../VotingSystem/VotingSystem";
 import { CommentDeleteNotification } from "../Comments/DeleteNotification";
+import { ArticleErrorNotification } from "../Errors/ArticleError";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -15,9 +16,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const ArticlePage = () => {
+  const navigate = useNavigate()
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [articleError, setArticleError] = useState({open: false, msg:''})
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -25,7 +28,9 @@ export const ArticlePage = () => {
     getArticleById(article_id).then((articleData) => {
       setArticle(articleData);
       setLoading(false);
-    });
+    }).catch((err) => {
+      navigate('/404')
+    })
   }, [article_id]);
 
   return loading ? (
@@ -54,13 +59,16 @@ export const ArticlePage = () => {
         id={article_id}
         votes={article.votes}
         setArticle={setArticle}
+        setArticleError={setArticleError}
       />
       <CommentsSection
         articleId={article_id}
         numOfComments={article.comment_count}
         setOpen={setOpen}
+        setArticleError={setArticleError}
       />
     <CommentDeleteNotification open={open} setOpen={setOpen}/>
+    <ArticleErrorNotification articleError={articleError} setArticleError={setArticleError}/>
     </Item>
   );
 };
