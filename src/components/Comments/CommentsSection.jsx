@@ -8,6 +8,7 @@ import { Box } from "@mui/material";
 import { PostCommentBox } from "./PostComment";
 import { UserContext } from "../../contexts/User";
 import DeleteSelectedComment from "./RemoveComment";
+import { Loading } from "../Loading/Loading";
 
 export const CommentsSection = ({ articleId, numOfComments, setOpen, setArticleError }) => {
   const [comments, setComments] = useState([]);
@@ -26,7 +27,7 @@ export const CommentsSection = ({ articleId, numOfComments, setOpen, setArticleE
   }, [articleId, renderToggle]);
 
   return loading ? (
-    <p>Loading...</p>
+    <Loading />
   ) : (
     <div>
       <Accordion  expanded={expand}>

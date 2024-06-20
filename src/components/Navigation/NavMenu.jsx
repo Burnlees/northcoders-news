@@ -2,7 +2,9 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import { MenuList } from "@mui/material";
 
 export default function NavMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,8 +24,9 @@ export default function NavMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        sx={{ color: "white" }}
       >
-        Navigation
+        <MenuIcon />
       </Button>
       <Menu
         id="basic-menu"
@@ -34,12 +37,20 @@ export default function NavMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <Link>Profile</Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}><Link to={'/articles'}>Articles</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link>Users</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link>Logout</Link></MenuItem>
+        <MenuList >
+          <MenuItem onClick={handleClose}>
+            <Link>Profile</Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to={"/articles"}>Articles</Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link>Users</Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link>Logout</Link>
+          </MenuItem>
+        </MenuList>
       </Menu>
     </div>
   );

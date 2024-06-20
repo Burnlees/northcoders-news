@@ -7,9 +7,10 @@ import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { ArticleSort } from "./ArticleSort";
 import { Box } from "@mui/material";
 import { ArticlePagination } from "./Pagination";
+import { Loading } from "../Loading/Loading";
 
 export const ArticleList = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -17,34 +18,38 @@ export const ArticleList = () => {
   const filterByTopic = searchParams.get("topic");
   const sortBy = searchParams.get("sort_by");
   const order = searchParams.get("order");
-  const p = searchParams.get('p')
+  const p = searchParams.get("p");
 
   const location = useLocation();
 
   useEffect(() => {
     setLoading(true);
-    const topic = filterByTopic !== 'null' ? filterByTopic : undefined;
-    getArticles(topic, sortBy, order, p).then((response) => {
-      setArticles(response);
-      setLoading(false);
-    }).catch((err) => {
-      navigate('/404')
-    })
+    const topic = filterByTopic !== "null" ? filterByTopic : undefined;
+    getArticles(topic, sortBy, order, p)
+      .then((response) => {
+        setArticles(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        navigate("/404");
+      });
   }, [location.search]);
 
-
   return loading ? (
-    <p>Loading...</p>
+    <Loading />
   ) : (
     <>
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          maxWidth: "80%",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: { xs: "center", sm: "space-between" },
+          alignItems: { xs: "center", sm: "flex-end" },
+          width: "100%",
           m: "auto",
           borderBottom: "solid 1px black",
+          gap: 1,
+          p: 1,
         }}
       >
         <CategoriesMenu />
@@ -63,4 +68,3 @@ export const ArticleList = () => {
     </>
   );
 };
-
