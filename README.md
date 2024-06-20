@@ -9,6 +9,9 @@
 ### Link To Back-End Repo
 - https://github.com/Burnlees/be-nc-news
 
+### Link to Hosted API
+- https://burnlees-news.onrender.com/api/
+
 ### Requirements
 - Minimum version of node required: `v21.6.2`
 
