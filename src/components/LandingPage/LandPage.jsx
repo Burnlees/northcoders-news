@@ -15,15 +15,13 @@ export const LandingPage = () => {
       sx={{
         maxWidth: "80%",
         marginTop: "25%",
-        backgroundColor: "black",
-        color: "white",
       }}
     >
       <CardMedia
         component="img"
         alt="green iguana"
         height="300"
-        image="src/assets/newspaper.jpg"
+        image="./assets/newspaper.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -35,7 +33,7 @@ export const LandingPage = () => {
       </CardContent>
       <CardActions>
         <Link to={'/articles'}>
-          <Button size="small" sx={{ backgroundColor: "blue", color: "white" }}>
+          <Button size="small" sx={{}}>
             Get Started
           </Button>
         </Link>
@@ -43,3 +41,5 @@ export const LandingPage = () => {
     </Card>
   );
 };
+
+

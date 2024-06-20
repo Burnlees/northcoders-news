@@ -7,6 +7,10 @@ import { CommentsSection } from "../Comments/CommentsSection";
 import { VotingSystem } from "../VotingSystem/VotingSystem";
 import { CommentDeleteNotification } from "../Comments/DeleteNotification";
 import { ArticleErrorNotification } from "../Errors/ArticleError";
+import { Chip, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { TopicRounded } from "@mui/icons-material";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,21 +20,23 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const ArticlePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [articleError, setArticleError] = useState({open: false, msg:''})
+  const [articleError, setArticleError] = useState({ open: false, msg: "" });
   const { article_id } = useParams();
 
   useEffect(() => {
     setLoading(true);
-    getArticleById(article_id).then((articleData) => {
-      setArticle(articleData);
-      setLoading(false);
-    }).catch((err) => {
-      navigate('/404')
-    })
+    getArticleById(article_id)
+      .then((articleData) => {
+        setArticle(articleData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        navigate("/404");
+      });
   }, [article_id]);
 
   return loading ? (
@@ -42,12 +48,32 @@ export const ArticlePage = () => {
       sx={{ padding: "1rem", marginBottom: "1rem", borderRadius: "1rem" }}
     >
       <header>
-        <h2>{article.title}</h2>
+        <Typography variant="h5" gutterBottom> 
+        {article.title}
+        </Typography>
       </header>
       <ul>
-        <li>Created By: {article.author}</li>
-        <li>Created At: {article.created_at}</li>
-        <li>Topic: {article.topic}</li>
+        <li>
+          <Chip
+            icon={<AccountCircleIcon fontSize="small" color="primary" />}
+            label={article.author}
+            variant="outlined"
+          />
+        </li>
+        <li>
+          <Chip
+            icon={<CalendarMonthIcon fontSize="small" color="primary" />}
+            label={new Date(article.created_at).toLocaleDateString()}
+            variant="outlined"
+          />
+        </li>
+        <li>
+          <Chip
+            icon={<TopicRounded fontSize="small" color="primary" />}
+            label={article.topic}
+            variant="outlined"
+          />
+        </li>
       </ul>
       <img src={article.article_img_url} alt="" width={300} />
       <p>{article.body}</p>
@@ -67,8 +93,11 @@ export const ArticlePage = () => {
         setOpen={setOpen}
         setArticleError={setArticleError}
       />
-    <CommentDeleteNotification open={open} setOpen={setOpen}/>
-    <ArticleErrorNotification articleError={articleError} setArticleError={setArticleError}/>
+      <CommentDeleteNotification open={open} setOpen={setOpen} />
+      <ArticleErrorNotification
+        articleError={articleError}
+        setArticleError={setArticleError}
+      />
     </Item>
   );
 };

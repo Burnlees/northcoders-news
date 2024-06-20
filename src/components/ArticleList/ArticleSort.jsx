@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, MenuList } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 history;
@@ -43,12 +43,14 @@ export const ArticleSort = ({ topic, page }) => {
           onChange={handleSortChange}
           label="Sort"
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"created_at"}>Date</MenuItem>
-          <MenuItem value={"comment_count"}>Comment Count</MenuItem>
-          <MenuItem value={"votes"}>Votes</MenuItem>
+          <MenuList sx={{ display: "flex", flexDirection: "column" }}>
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={"created_at"}>Date</MenuItem>
+            <MenuItem value={"comment_count"}>Comment Count</MenuItem>
+            <MenuItem value={"votes"}>Votes</MenuItem>
+          </MenuList>
         </Select>
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -60,11 +62,17 @@ export const ArticleSort = ({ topic, page }) => {
           onChange={handleOrderChange}
           label="Order"
         >
-          <MenuItem value={"asc"}>Ascending</MenuItem>
-          <MenuItem value={"desc"}>Descending</MenuItem>
+          <MenuList sx={{ display: "flex", flexDirection: "column" }}>
+            <MenuItem value={"asc"}>Ascending</MenuItem>
+            <MenuItem value={"desc"}>Descending</MenuItem>
+          </MenuList>
         </Select>
       </FormControl>
-      <Button variant="contained" onClick={submitSort} sx={{ m: 1, height: '2rem', p: 0, maxWidth: '1rem' }}>
+      <Button
+        variant="contained"
+        onClick={submitSort}
+        sx={{ m: 1, height: "2rem", p: 0, maxWidth: "1rem" }}
+      >
         <CheckCircleOutlineIcon />
       </Button>
     </Box>
