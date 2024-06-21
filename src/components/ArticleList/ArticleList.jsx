@@ -55,7 +55,7 @@ export const ArticleList = () => {
         <CategoriesMenu />
         <ArticleSort topic={filterByTopic} />
       </Box>
-      <ul>
+      <ul className="article-list">
         {articles.map((articleData) => {
           return (
             <li key={articleData.article_id}>

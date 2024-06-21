@@ -11,6 +11,7 @@ import { Chip, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { TopicRounded } from "@mui/icons-material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { Loading } from "../Loading/Loading";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -40,7 +41,7 @@ export const ArticlePage = () => {
   }, [article_id]);
 
   return loading ? (
-    <p>Loading...</p>
+    <Loading />
   ) : (
     <Item
       key={article.article_id}
@@ -48,11 +49,11 @@ export const ArticlePage = () => {
       sx={{ padding: "1rem", marginBottom: "1rem", borderRadius: "1rem" }}
     >
       <header>
-        <Typography variant="h5" gutterBottom> 
-        {article.title}
+        <Typography variant="h5" gutterBottom>
+          {article.title}
         </Typography>
       </header>
-      <ul>
+      <ul className="article-list">
         <li>
           <Chip
             icon={<AccountCircleIcon fontSize="small" color="primary" />}
@@ -78,7 +79,7 @@ export const ArticlePage = () => {
       <img src={article.article_img_url} alt="" width={300} />
       <p>{article.body}</p>
 
-      <ul>
+      <ul className="article-list">
         <li>Votes: {article.votes}</li>
       </ul>
       <VotingSystem

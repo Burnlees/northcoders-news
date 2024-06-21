@@ -9,6 +9,7 @@ export const getArticles = (topic, sort_by, order, p) => {
     sort_by,
     order,
     p,
+    limit: 9
   };
   if (topic) {
     params.topic = topic;
