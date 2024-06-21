@@ -9,9 +9,11 @@ import { MenuList } from "@mui/material";
 export default function NavMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -25,6 +27,7 @@ export default function NavMenu() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         sx={{ color: "white" }}
+        aria-label="Open navigation menu"
       >
         <MenuIcon />
       </Button>
@@ -35,20 +38,23 @@ export default function NavMenu() {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
+          role: "menu",
         }}
       >
-        <MenuList >
-          <MenuItem onClick={handleClose}>
-            <Link>Profile</Link>
+        <MenuList role="menu">
+          <MenuItem onClick={handleClose} role="menuitem">
+            <Link aria-label="Go to profile page">Profile</Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link to={"/articles"}>Articles</Link>
+          <MenuItem onClick={handleClose} role="menuitem">
+            <Link to="/articles" aria-label="Go to articles page">
+              Articles
+            </Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link>Users</Link>
+          <MenuItem onClick={handleClose} role="menuitem">
+            <Link aria-label="Go to users page">Users</Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link>Logout</Link>
+          <MenuItem onClick={handleClose} role="menuitem">
+            <Link aria-label="Logout">Logout</Link>
           </MenuItem>
         </MenuList>
       </Menu>

@@ -29,7 +29,7 @@ export const ErrorNotFound = () => {
         component="img"
         alt="Error Message"
         height="300"
-        image="public/assets/newspaper.jpg"
+        image="./assets/error.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

@@ -24,6 +24,7 @@ export const ArticlePagination = () => {
       page={page}
       variant="outlined"
       shape="rounded"
+      aria-label="Article pages"
       sx={{ marginBottom: 5, display:"flex", justifyContent: 'center' }}
       onChange={handlePageChange}
     />

@@ -32,10 +32,10 @@ export const VotingSystem = ({ id, setArticle, setArticleError }) => {
 
   return (
     <Box sx={{ width: "3rem", display: "flex", gap: "1rem" }}>
-      <Button onClick={handleUpVote}>
+      <Button onClick={handleUpVote} aria-label="Upvote">
         <ThumbUpIcon sx={{ color: "green" }} />
       </Button>{" "}
-      <Button onClick={handleDownVote}>
+      <Button onClick={handleDownVote} aria-label="Downvote">
         <ThumbDownIcon sx={{ color: "red" }} />
       </Button>
     </Box>

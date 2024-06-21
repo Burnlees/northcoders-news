@@ -55,7 +55,7 @@ export const ArticleList = () => {
         <CategoriesMenu />
         <ArticleSort topic={filterByTopic} />
       </Box>
-      <ul className="article-list">
+      <ul className="article-list" aria-label="List of articles">
         {articles.map((articleData) => {
           return (
             <li key={articleData.article_id}>
@@ -64,7 +64,9 @@ export const ArticleList = () => {
           );
         })}
       </ul>
-      <ArticlePagination />
+      <footer>
+        <ArticlePagination />
+      </footer>
     </>
   );
 };

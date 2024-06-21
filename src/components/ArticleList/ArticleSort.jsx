@@ -33,12 +33,21 @@ export const ArticleSort = ({ topic, page }) => {
   };
 
   return (
-    <Box display={"flex"} alignItems={"flex-end"}>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Sort</InputLabel>
+    <Box
+      display={"flex"}
+      alignItems={"flex-end"}
+      role="search"
+      aria-label="Sort and Order Articles"
+    >
+      <FormControl
+        variant="standard"
+        sx={{ m: 1, minWidth: 120 }}
+        aria-labelledby="sort-label"
+      >
+        <InputLabel id="sort-label">Sort</InputLabel>
         <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+          labelId="sort-label"
+          id="sort-select"
           value={sortBy}
           onChange={handleSortChange}
           label="Sort"
@@ -51,25 +60,30 @@ export const ArticleSort = ({ topic, page }) => {
           <MenuItem value={"votes"}>Votes</MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 115}}>
-        <InputLabel id="demo-simple-select-standard-label">Order</InputLabel>
+      <FormControl
+        variant="standard"
+        sx={{ m: 1, minWidth: 115 }}
+        aria-labelledby="order-label"
+      >
+        <InputLabel id="order-label">Order</InputLabel>
         <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+          labelId="order-label"
+          id="order-select"
           value={orderBy}
           onChange={handleOrderChange}
           label="Order"
         >
-            <MenuItem value={"asc"}>Ascending</MenuItem>
-            <MenuItem value={"desc"}>Descending</MenuItem>
+          <MenuItem value={"asc"}>Ascending</MenuItem>
+          <MenuItem value={"desc"}>Descending</MenuItem>
         </Select>
       </FormControl>
       <Button
         variant="contained"
         onClick={submitSort}
         sx={{ m: 1, height: "2rem", p: 0, maxWidth: "1rem" }}
+        aria-label="Apply sorting and ordering"
       >
-        <CheckCircleOutlineIcon  />
+        <CheckCircleOutlineIcon />
       </Button>
     </Box>
   );
