@@ -21,7 +21,7 @@ export const LandingPage = () => {
         component="img"
         alt="green iguana"
         height="300"
-        image="./asssets/newspaper.jpg"
+        image="./assets/newspaper.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
