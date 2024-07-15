@@ -12,7 +12,6 @@ import { PostCommentBox } from "./PostComment";
 import { UserContext } from "../../contexts/User";
 import DeleteSelectedComment from "./RemoveComment";
 import { Loading } from "../Loading/Loading";
-import { Flare } from "@mui/icons-material";
 
 export const CommentsSection = ({
   articleId,

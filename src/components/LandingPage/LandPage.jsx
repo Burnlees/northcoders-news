@@ -3,8 +3,6 @@ import GLOBE from "vanta/dist/vanta.globe.min";
 import HeroCard from "./Hero";
 import { Box } from "@mui/material";
 
-// to style later
-
 export const LandingPage = () => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const myRef = useRef(null);

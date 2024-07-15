@@ -2,7 +2,6 @@ import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box } from "@mui/material";
 
 export const ArticleErrorNotification = ({ articleError, setArticleError }) => {
   const handleClose = (event, reason) => {

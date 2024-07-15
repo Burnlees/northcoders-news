@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import { ArticleCard } from "./ArticleCard";
 import "./ArticleList.css";
-import { CategoriesMenu } from "./CategoriesMenu";
 import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { ArticleSort } from "./ArticleSort";
 import { Box } from "@mui/material";
@@ -52,7 +51,6 @@ export const ArticleList = () => {
           p: 1,
         }}
       >
-        <CategoriesMenu />
         <ArticleSort topic={filterByTopic} />
       </Box>
       <ul className="article-list" aria-label="List of articles">

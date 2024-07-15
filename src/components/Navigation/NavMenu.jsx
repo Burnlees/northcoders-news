@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
+import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
 import { MenuList } from "@mui/material";
 
@@ -26,10 +26,10 @@ export default function NavMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: "white" }}
-        aria-label="Open navigation menu"
+        sx={{ color: "white", padding: 0, width: 10}}
+        aria-label="Open user menu"
       >
-        <MenuIcon />
+        <PersonIcon />
       </Button>
       <Menu
         id="basic-menu"
