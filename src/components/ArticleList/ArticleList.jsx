@@ -42,7 +42,7 @@ export const ArticleList = () => {
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
-          justifyContent: { xs: "center", sm: "space-between" },
+          justifyContent: { xs: "center", sm: "flex-end" },
           alignItems: { xs: "center", sm: "flex-end" },
           width: "100%",
           m: "auto",
