@@ -7,34 +7,29 @@ import { ArticlePage } from "./components/ArticlePage/ArticlePage";
 import { LandingPage } from "./components/LandingPage/LandPage";
 import { ErrorNotFound } from "./components/Errors/ErrorNotFound";
 
-
 function App() {
   const location = useLocation();
 
   return (
-    
-      <>
-        {location.pathname !== "/" && <Header />}
-        <Routes>
-          <Route path="/" element={<ContentSection Section={LandingPage} />} />
-          <Route
-            path="/articles"
-            element={<ContentSection Section={ArticleList} />}
-          />
-          <Route
-            path="/articles/:article_id"
-            element={<ContentSection Section={ArticlePage} />}
-          />
-          <Route
-            path="/404"
-            element={<ContentSection Section={ErrorNotFound} />}
-          />
-          <Route
-            path="*"
-            element={<ContentSection Section={ErrorNotFound} />}
-          />
-        </Routes>
-      </>
+    <>
+      {location.pathname !== "/" && <Header />}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/articles"
+          element={<ContentSection Section={ArticleList} />}
+        />
+        <Route
+          path="/articles/:article_id"
+          element={<ContentSection Section={ArticlePage} />}
+        />
+        <Route
+          path="/404"
+          element={<ContentSection Section={ErrorNotFound} />}
+        />
+        <Route path="*" element={<ErrorNotFound />} />
+      </Routes>
+    </>
   );
 }
 

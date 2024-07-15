@@ -1,45 +1,47 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import GLOBE from "vanta/dist/vanta.globe.min";
+import HeroCard from "./Hero";
+import { Box } from "@mui/material";
 
 // to style later
 
 export const LandingPage = () => {
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const myRef = useRef(null);
+  useEffect(() => {
+    if (!vantaEffect) {
+      setVantaEffect(
+        GLOBE({
+          el: myRef.current,
+          minHeight: window.innerHeight,
+          minWidth: window.innerWidth,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0x327f,
+          color2: 0xd0c6f2,
+          backgroundColor: 0xffffff,
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
   return (
-    <Card
+    <Box
+      ref={myRef}
       sx={{
-        maxWidth: "80%",
-        marginTop: "25%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        minHeight: "100vh",
+        minWidth: "100vw",
       }}
     >
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="300"
-        image="./assets/newspaper.jpg"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Northcoders News
-        </Typography>
-        <Typography variant="body2">
-          The place to share your thoughts and opinions
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Link to={'/articles'}>
-          <Button size="small" sx={{}}>
-            Get Started
-          </Button>
-        </Link>
-      </CardActions>
-    </Card>
+      <HeroCard />
+    </Box>
   );
 };
-
-
